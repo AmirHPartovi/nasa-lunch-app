@@ -13,4 +13,4 @@ const lunch ={
 
 lunches.set(lunch.flightNumber,lunch);
 
-module.exports = lunches
+module.exports = {lunches}
