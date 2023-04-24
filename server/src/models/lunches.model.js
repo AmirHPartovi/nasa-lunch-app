@@ -5,7 +5,7 @@ const lunch ={
     mission:'kepler Exploration X',
     rocket:'Explorer IS1',
     lunchDate: new Date('December 12 , 2035'),
-    planet: 'kepler-442 b',
+    target: 'kepler-442 b',
     customer:['NOVA','NASA'],
     upcoming:true,
     success:true,
