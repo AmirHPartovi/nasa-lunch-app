@@ -7,7 +7,10 @@ async function httpGetPlanets() {
 
 async function httpGetLaunches() {
   const response = await fetch(`${API_URL}/lunches`)
-  return await response.json();
+  const fetchedLaunches = await response.json();
+  fetchedLaunches.sort((a,b)=>{
+    return a.flightNumber - b.flightNumber
+  })
 }
 
 async function httpSubmitLaunch(launch) {
