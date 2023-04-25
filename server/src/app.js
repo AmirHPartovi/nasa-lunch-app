@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname,'..','static')))
 
 app.use('/planets', planetsRouter);
 app.use('/lunches', lunchesRouter);
-app.get('/*',(res,req)=>{
+app.get('/',(res,req)=>{
     res.sendFile(path.join(__dirname,'..','static','index.html'))
 })
 
