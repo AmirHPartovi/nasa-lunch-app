@@ -13,4 +13,10 @@ const lunch ={
 
 lunches.set(lunch.flightNumber,lunch);
 
-module.exports = {lunches}
+function getAllLunches(){
+    return Array.from(lunches.values());
+}
+
+module.exports = {
+    getAllLunches,
+}
