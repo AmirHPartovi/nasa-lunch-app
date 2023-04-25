@@ -5,7 +5,7 @@ const {
 
 
 const httpGetAllLunches = (req,res)=>{
-    return res.status(200).json(getAllLunches)
+    return res.status(200).json(getAllLunches())
 }
 const httpAddNewLunch =(req,res)=>{
     const lunch = req.body;
