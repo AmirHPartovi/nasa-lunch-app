@@ -1,37 +1,37 @@
-const lunches = new Map();
+const launches = new Map();
 
 let latestFlightNumber = 100;
 
-const lunch ={
+const launch ={
     flightNumber:100,
     mission:'kepler Exploration X',
     rocket:'Explorer IS1',
-    lunchDate: new Date('December 12 , 2035'),
+    launchDate: new Date('December 12 , 2035'),
     target: 'kepler-442 b',
     customer:['NOAA','NASA'],
     upcoming:true,
     success:true,
 };
 
-lunches.set(lunch.flightNumber,lunch);
+launches.set(launch.flightNumber,launch);
 
-function getAllLunches(){
-    return Array.from(lunches.values());
+function getAllLaunches(){
+    return Array.from(launches.values());
 };
 
-function addNewLunch(lunch){
+function addNewLaunch(launch){
     latestFlightNumber++;
-    lunches.set(latestFlightNumber,
-        Object.assign(lunch,{
+    launches.set(latestFlightNumber,
+        Object.assign(launch,{
             customer:['NOAA','NASA'],
             upcoming:true,
             success:true,
             flightNumber:latestFlightNumber,
         }));
-    return lunch;
+    
 };
 
 module.exports = {
-    getAllLunches,
-    addNewLunch,
+    getAllLaunches,
+    addNewLaunch,
 }

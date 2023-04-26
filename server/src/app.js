@@ -4,7 +4,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 
 const planetsRouter = require('./routes/planets/planets.router');
-const lunchesRouter = require('./routes/lunches/lunches.router');
+const launchesRouter = require('./routes/launches/launches.router');
 
 const app = express();
 
@@ -18,9 +18,9 @@ app.use(express.static(path.join(__dirname,'..','static')))
 
 
 app.use('/planets', planetsRouter);
-app.use('/lunches', lunchesRouter);
-app.use('/',(res,req)=>{
-    res.sendFile(path.join(__dirname,'..','static','index.html'))
+app.use('/launches', launchesRouter);
+app.get('/*',(res,req)=>{
+   return res.sendFile(path.join(__dirname,'..','static','index.html'));
 })
 
 module.exports = app
