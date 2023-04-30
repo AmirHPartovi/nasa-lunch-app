@@ -1,3 +1,6 @@
+const launchesDatabase = require('./launches.mongo')
+const planets = require('./planets.mongo');
+
 const launches = new Map();
 
 let latestFlightNumber = 100;
@@ -18,10 +21,29 @@ const launch ={
 };
 
 launches.set(launch.flightNumber,launch);
+saveLaunches(launch)
 
-function getAllLaunches(){
-    return Array.from(launches.values());
+async function getAllLaunches(){
+    return await launchesDatabase
+    .find({},{"_id":0,"__V":0})
 };
+
+async function saveLaunches(launch){
+    const planet = planets.findOne({
+        keplerName : launch.target
+    })
+    if(!launch){
+        throw new Error('target does not match to habitable planets')
+    }
+
+    return await launchesDatabase.updateOne({
+        flightNumber:launch.flightNumber
+    },
+    launch,
+    {
+        upsert:true
+    })
+}
 
 function addNewLaunch(launch){
     latestFlightNumber++;
