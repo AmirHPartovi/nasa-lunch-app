@@ -6,4 +6,4 @@ const planetsSchema = new mongoose.Schema({
         required:true,
     }
 })
-module.exports = planetsSchema
+module.exports = mongoose.model("Planet",planetsSchema)
