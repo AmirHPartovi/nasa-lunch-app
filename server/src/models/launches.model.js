@@ -105,10 +105,12 @@ async function getLatestFlightNumber(){
     return latestFlight.flightNumber;
 }
 
-async function getAllLaunches(){
+async function getAllLaunches(skip,limit){
     // return Array.from(launches.values())
     return await launchesDatabase
     .find({},{"_id":0,"__V":0,})
+    .skip(skip)
+    .limit(limit);
 };
 
 async function saveLaunches(launch){
