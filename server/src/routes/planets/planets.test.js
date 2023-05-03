@@ -12,7 +12,7 @@ describe('test Get /planets',()=>{
     });
     test('should be 200', async() => { 
         const response = await request(app)
-        .get('/planets')
+        .get('/v1/planets')
         .expect('Content-Type',/json/)
         .expect(200)
     })

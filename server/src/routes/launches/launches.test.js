@@ -10,16 +10,16 @@ describe('connect mongo wrap',async()=>{
     afterAll(async()=>{
         await mongoDisconnect()
     })
-    describe('test GET /launches/',()=>{
+    describe('test GET /v1/launches/',()=>{
         test('it should response with 200',async()=>{
             const response = await request(app)
-            .get('/launches')
+            .get('/v1/launches')
             .expect('Content-Type',/json/)
             .expect(200)
             // expect(response).toBe(200);
         })
     })
-    describe('test POST /launches/',()=>{
+    describe('test POST /v1/launches/',()=>{
     
         const completeLaunchData ={
             mission : 'USS Enterprise',
@@ -41,7 +41,7 @@ describe('connect mongo wrap',async()=>{
         
         test('it should response with 201',async()=>{
             const response = await request(app)
-            .post('/launches')
+            .post('/v1/launches')
             .send(completeLaunchData)
             .expect('Content-Type',/json/)
             .expect(201)
@@ -55,7 +55,7 @@ describe('connect mongo wrap',async()=>{
         test('it should catch Missing Required Data',async()=>{
     
             const response = await request(app)
-            .post('/launches')
+            .post('/v1/launches')
             .send(launchDataWithoutDate)
             .expect('Content-Type',/json/)
             .expect(400)
@@ -66,7 +66,7 @@ describe('connect mongo wrap',async()=>{
         })
         test('it should catch Invalid Date Type',async()=>{
             const response = await request(app)
-            .post('/launches')
+            .post('/v1/launches')
             .send(launchWithInvalidDateType)
             .expect('Content-Type',/json/)
             .expect(400)
