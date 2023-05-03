@@ -109,8 +109,10 @@ async function getAllLaunches(skip,limit){
     // return Array.from(launches.values())
     return await launchesDatabase
     .find({},{"_id":0,"__V":0,})
+    .sort({flightNumber : 1})
     .skip(skip)
-    .limit(limit);
+    .limit(limit)
+    
 };
 
 async function saveLaunches(launch){
