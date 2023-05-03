@@ -8,19 +8,19 @@ const SPACEX_API_URL = 'https://api.spacexdata.com/v4/launches/query'
 
 
 
-const launch ={
-    flightNumber:100, //flight_number
-    mission:'kepler Exploration X', //name
-    rocket:'Explorer IS1',  //rocket.name
-    launchDate: new Date('December 12 , 2035'),//date_local
-    target: 'Kepler-442 b',// not applicable
-    customer:['NOAA','NASA'], //payloads.customers
-    upcoming:true,//upcoming
-    success:true,//success
-};
+// const launch ={
+//     flightNumber:100, //flight_number
+//     mission:'kepler Exploration X', //name
+//     rocket:'Explorer IS1',  //rocket.name
+//     launchDate: new Date('December 12 , 2035'),//date_local
+//     target: 'Kepler-442 b',// not applicable
+//     customers:['NOAA','NASA'], //payloads.customers
+//     upcoming:true,//upcoming
+//     success:true,//success
+// };
 
 // launches.set(launch.flightNumber,launch);
-saveLaunches(launch)
+// saveLaunches(launch)
 async function populateLaunchData(){
     console.log('Downloading launch data ...')
     const response = await axios.post(SPACEX_API_URL,{
@@ -41,9 +41,9 @@ async function populateLaunchData(){
                     select:{
                         customers:1
                     }
-                }
-            ]
-        }
+                },
+            ],
+        },
     });
     if(response.status !== 200){
         throw new Error('cant download spaceX launch data ...')
@@ -53,7 +53,7 @@ async function populateLaunchData(){
     for(const launchDoc of launchDocs){
         const payloads = launchDoc['payloads'];
         const customers = payloads.flatMap((payload)=>{
-            return payload['customers']
+            return payload['customers'];
         });
         const launch={
             flightNumber:launchDoc['flight_number'],
@@ -64,6 +64,7 @@ async function populateLaunchData(){
             success:launchDoc['success'],
             customers,
         }
+        console.log(`${launch.customers}`);
         // console.log(`${launch.flightNumber} , ${launch.mission}`)
         await saveLaunches(launch)
     }
@@ -132,7 +133,7 @@ async function scheduleNewLaunch(launch){
 
     const latestFlightNumber =await getLatestFlightNumber() +1;
     const newLaunch = await Object.assign(launch,{
-        customer:['NOAA','NASA'],
+        customers:['NOAA','NASA'],
         upcoming:true,
         success:true,
         flightNumber:latestFlightNumber,
@@ -142,7 +143,7 @@ async function scheduleNewLaunch(launch){
     //     latestFlightNumber++;
 //     launches.set(latestFlightNumber,
 //         Object.assign(launch,{
-//             customer:['NOAA','NASA'],
+//             customers:['NOAA','NASA'],
 //             upcoming:true,
 //             success:true,
 //             flightNumber:latestFlightNumber,
