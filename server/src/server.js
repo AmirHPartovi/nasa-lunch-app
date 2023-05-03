@@ -5,6 +5,7 @@ const {mongoConnect} = require('./services/mongo')
 // const cluster = require('cluster')
 
 const {loadPlanetData} = require('./models/planets.model')
+const{loadLaunchData} = require('./models/launches.model')
 
 const PORT = process.env.PORT || 8000;
 
@@ -15,6 +16,7 @@ const server =http.createServer(app);
 async function startServer(){
     await mongoConnect()
     await loadPlanetData();
+    await loadLaunchData()
     // await mongoose.connect(MONGO_URL,,{
     //     useNewUrlParser : true ,
     //     useFindAndModify : false ,
